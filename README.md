@@ -32,6 +32,10 @@
 <h2>Ну и удалим Григорьва Кирилла</h2>
 
 ![image](https://github.com/DANTECK-dev/Student-Management-Sysem/assets/62847375/975a8c95-3638-40df-be61-573aec49e075)
+<h2>MySQL итоговая база данных, без SSL</h2>
+
+![image](https://github.com/DANTECK-dev/Student-Management-Sysem/assets/62847375/a50b61e6-11bc-450a-a35a-cc4dcc064b86)
+
 
 <h1>Установка</h1>
 
