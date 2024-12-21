@@ -6,13 +6,58 @@
     <!-- Latest compiled and minified CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
+<style>
+    .notification {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        background-color: #f8d7da;
+        color: #721c24;
+        border: 1px solid #f5c6cb;
+        border-radius: 5px;
+        padding: 10px 20px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        z-index: 1000;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        max-width: 300px;
+        font-family: Arial, sans-serif;
+        opacity: 0;
+        transform: translateY(-20px);
+        transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+
+    .notification.show {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    .close-btn {
+        background: none;
+        border: none;
+        font-size: 16px;
+        color: #721c24;
+        cursor: pointer;
+        margin-left: 10px;
+    }
+
+    .close-btn:hover {
+        color: #491217;
+    }
+</style>
 <body>
 
 <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
         <div class="container-fluid">
-            <a class="navbar-brand" th:href="@{/students}">Student Management System</a>
+            <a class="navbar-brand" th:href="@{/students}">Student Management System (Spring boot &times; Thymeleaf)</a>
         </div>
     </nav>
+
+<div id="notification" class="notification alert-danger">
+    <span>Студент с указанным ID не найден.</span>
+    <button class="close-btn" onclick="closeNotification()">&times;</button>
+</div>
 
 <div class="container">
         <div class="row">
@@ -49,5 +94,28 @@
     </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    // Функция для отображения уведомления
+    function showNotification() {
+        const notification = document.getElementById('notification');
+        notification.classList.add('show'); // Добавляем класс для показа
+        setTimeout(() => {
+            notification.classList.remove('show'); // Убираем класс для скрытия
+        }, 5000); // Уведомление исчезает через 5 секунд
+    }
+
+    // Функция для закрытия уведомления
+    function closeNotification() {
+        const notification = document.getElementById('notification');
+        notification.classList.remove('show'); // Убираем класс для скрытия
+    }
+
+    // Проверяем, есть ли параметр error в URL
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.get('error') === 'StudentNotFound') {
+        showNotification(); // Показываем уведомление
+    }
+</script>
+
 </body>
 </html>

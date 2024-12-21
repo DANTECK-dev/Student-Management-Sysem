@@ -41,7 +41,12 @@ public class StudentController {
 
     @GetMapping("/students/edit/{id}")
     public String editStudentForm(@PathVariable Long id, Model model){
-        model.addAttribute("students", studentService.getStudentById(id));
+        Student student = studentService.getStudentById(id);
+        if (student == null) {
+            // Если студент с таким id не найден, перенаправляем на страницу со списком студентов
+            return "redirect:/students?error=StudentNotFound";
+        }
+        model.addAttribute("students", student);
         return "edit_student";
     }
 
@@ -52,6 +57,12 @@ public class StudentController {
 
         //get student from db by id
         Student existingStudent = studentService.getStudentById(id);
+        if (existingStudent == null) {
+            // Если студент с таким id не найден, перенаправляем на страницу со списком студентов
+            return "redirect:/students?error=StudentNotFound";
+        }
+
+        // Обновляем данные существующего студента
         existingStudent.setId(id);
         existingStudent.setFirstName(student.getFirstName());
         existingStudent.setLastName(student.getLastName());
@@ -64,7 +75,18 @@ public class StudentController {
 
     @GetMapping("/students/{id}")
     public String deleteStudent(@PathVariable Long id, Model model){
+        Student existingStudent = studentService.getStudentById(id);
+        if (existingStudent == null) {
+            // Если студент с таким id не найден, перенаправляем на страницу со списком студентов
+            return "redirect:/students?error=StudentNotFound";
+        }
+
         studentService.deleteStudentById(id);
+        return "redirect:/students";
+    }
+
+    @GetMapping("/")
+    public String redirectToIndex(){
         return "redirect:/students";
     }
 }
