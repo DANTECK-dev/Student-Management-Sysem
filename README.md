@@ -1,5 +1,5 @@
 
-<h1>Student Management System (SMS)</h1>
+<h1>Student Management System (SMS) FullStack (SpringBoot + Thymeleaf)</h1>
 
 **Описание**
 <p>Student Management System (SMS) — это система веб-платформа, предназначенная для управления информацией о студентах. Разработана с использованием Spring Boot &times; Thymeleaf</p>
